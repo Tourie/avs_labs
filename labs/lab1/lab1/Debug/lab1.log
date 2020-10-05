@@ -1,0 +1,8 @@
+﻿  lab1.cpp
+C:\BSUIR\5 cем\АВС\lab1\lab1\lab1\lab1.cpp(113): warning C4799: функция "from__int8_to__int16" не имеет инструкции EMMS
+C:\BSUIR\5 cем\АВС\lab1\lab1\lab1\lab1.cpp(131): warning C4799: функция "print__m64_i16" не имеет инструкции EMMS
+C:\BSUIR\5 cем\АВС\lab1\lab1\lab1\lab1.cpp(119): warning C4799: функция "sub__int16" не имеет инструкции EMMS
+C:\BSUIR\5 cем\АВС\lab1\lab1\lab1\lab1.cpp(105): warning C4799: функция "main" не имеет инструкции EMMS
+C:\BSUIR\5 cем\АВС\lab1\lab1\lab1\lab1.cpp(125): warning C4799: функция "add__int16" не имеет инструкции EMMS
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\include\utility(257): warning C4799: функция "std::pair<__m64,__m64>::operator=<std::pair<__m64,__m64>,0>" не имеет инструкции EMMS
+  lab1.vcxproj -> C:\BSUIR\5 cем\АВС\lab1\lab1\Debug\lab1.exe
