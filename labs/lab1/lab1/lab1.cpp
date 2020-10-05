@@ -8,6 +8,9 @@ pair<__m64, __m64> from__int8_to__int16(__m64 A);
 pair<__m64, __m64> sub__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second);
 pair<__m64, __m64> add__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second);
 void print__m64_i16(__m64 a);
+__m64 from__int8_to__m64(char* A);
+pair<__m64, __m64> from__int16_to__m64(short* A);
+
 
 int main()
 {
@@ -24,11 +27,11 @@ int main()
 	}
 	cout << endl;
 
-	__m64 A_mmx = _mm_setr_pi8(A[0], A[1], A[2], A[3], A[4], A[5], A[6], A[7]);
-	__m64 B_mmx = _mm_setr_pi8(B[0], B[1], B[2], B[3], B[4], B[5], B[6], B[7]);
-	__m64 C_mmx = _mm_setr_pi8(C[0], C[1], C[2], C[3], C[4], C[5], C[6], C[7]);
+	__m64 A_mmx = from__int8_to__m64(A);
+	__m64 B_mmx = from__int8_to__m64(B);
+	__m64 C_mmx = from__int8_to__m64(C);
 
-	auto d = make_pair(_mm_set_pi16(D[3], D[2], D[1], D[0]), _mm_set_pi16(D[7], D[6], D[5], D[4]));
+	auto d = from__int16_to__m64(D);
 	auto a = from__int8_to__int16(A_mmx);
 	auto b = from__int8_to__int16(B_mmx);
 	auto c = from__int8_to__int16(C_mmx);
@@ -130,6 +133,27 @@ void print__m64_i16(__m64 a) {
 	}
 }
 
+__m64 from__int8_to__m64(char* A) {
+	__m64 result;
+	__asm {
+		mov eax, A
+		movq mm1, [eax]
+		movq result, mm1
+	}
+	return result;
+}
+
+pair<__m64, __m64> from__int16_to__m64(short* A) {
+	__m64 result_l, result_h;
+	__asm {
+		mov eax, A
+		movq mm1, [eax]
+		movq mm2, [eax + 8]
+		movq result_l, mm1
+		movq result_h, mm2
+	}
+	return make_pair(result_l, result_h);
+}
 
 
 
