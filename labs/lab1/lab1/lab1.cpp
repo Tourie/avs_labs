@@ -5,8 +5,8 @@
 using namespace std;
 
 pair<__m64, __m64> from__int8_to__int16(__m64 A);
-pair<__m64, __m64> sub__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second);
-pair<__m64, __m64> add__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second);
+pair<__m64, __m64> sub__int16(pair<__m64, __m64> , pair<__m64, __m64> );
+pair<__m64, __m64> add__int16(pair<__m64, __m64> A, pair<__m64, __m64> B);
 void print__m64_i16(__m64 a);
 __m64 from__int8_to__m64(char* A);
 pair<__m64, __m64> from__int16_to__m64(short* A);
@@ -37,9 +37,9 @@ int main()
 	auto c = from__int8_to__int16(C_mmx);
 
 
-	a = sub__int16(a.first, a.second, b.first, b.second); // A = A-B
-	c = sub__int16(c.first, c.second, d.first, d.second); // C = C-D
-	d = add__int16(a.first, a.second, c.first, c.second); // D = A+D
+	a = sub__int16(a, b); // A = A-B
+	c = sub__int16(c, d); // C = C-D
+	d = add__int16(a, c); // D = A+D
 
 	cout << "Фактический результат: \n";
 	print__m64_i16(d.first);
@@ -115,16 +115,16 @@ pair<__m64, __m64> from__int8_to__int16(__m64 A) {
 	return make_pair(left, right);
 }
 
-pair<__m64, __m64> sub__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second) {
-	A_first = _m_psubsw(A_first, B_first);
-	A_second = _m_psubsw(A_second, B_second);
-	return make_pair(A_first, A_second);
+pair<__m64, __m64> sub__int16(pair<__m64, __m64> A, pair<__m64,__m64> B) {
+	A.first = _m_psubsw(A.first, B.first);
+	A.second = _m_psubsw(A.second, B.second);
+	return make_pair(A.first, A.second);
 }
 
-pair<__m64, __m64> add__int16(__m64 A_first, __m64 A_second, __m64 B_first, __m64 B_second) {
-	A_first = _m_paddsw(A_first, B_first);
-	A_second = _m_paddsw(A_second, B_second);
-	return make_pair(A_first, A_second);
+pair<__m64, __m64> add__int16(pair<__m64, __m64> A, pair<__m64, __m64> B) {
+	A.first = _m_paddsw(A.first, B.first);
+	A.second = _m_paddsw(A.second, B.second);
+	return make_pair(A.first, A.second);
 }
 
 void print__m64_i16(__m64 a) {
