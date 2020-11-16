@@ -1,0 +1,9 @@
+﻿  lab2.cpp
+C:\Users\Makar\source\repos\lab2\lab2\FixedSizeQueue.h(37,30): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\Makar\source\repos\lab2\lab2\FixedSizeQueue.h(34): message : во время компиляции функции-члена класс шаблон "void FixedSizeQueue<int>::push_back(T)"
+          with
+          [
+              T=int
+          ]
+C:\Users\Makar\source\repos\lab2\lab2\Part2.h(44): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "FixedSizeQueue<int>"
+  lab2.vcxproj -> C:\Users\Makar\source\repos\lab2\Debug\lab2.exe
