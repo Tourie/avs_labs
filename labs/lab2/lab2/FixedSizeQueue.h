@@ -40,12 +40,10 @@ inline bool FixedSizeQueue<T>::pop(T& value)
 {
 	unique_lock<mutex> g(mtx);
 	if (queue.empty()) {
-		g.unlock();
 		this_thread::sleep_for(chrono::milliseconds(1));
 		if (queue.empty()) {
 			return false;
 		}
-		g.lock();
 	}
 	value = queue.front();
 	queue.pop();

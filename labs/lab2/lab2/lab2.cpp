@@ -17,7 +17,7 @@ void inc_atomic(int, vector<int>&);
 int main() {
 	setlocale(LC_ALL, "RU");
 	
-	part1();
+	//part1();
 	part2();
 }
 
