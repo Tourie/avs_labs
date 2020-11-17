@@ -1,0 +1,12 @@
+﻿  lab3.cpp
+C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\lab3\lab3.cpp(12,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\lab3\lab3.cpp(17,22): warning C4244: инициализация: преобразование "__int64" в "unsigned int", возможна потеря данных
+C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\lab3\lab3.cpp(18,22): warning C4244: инициализация: преобразование "__int64" в "unsigned int", возможна потеря данных
+C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\lab3\lab3.cpp(24,6): warning C4101: i: неиспользованная локальная переменная
+C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\lab3\lab3.cpp(10): warning C4101: i: неиспользованная локальная переменная
+  Создание кода
+  2 of 22 functions ( 9.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  lab3.vcxproj -> C:\Users\Makar\Documents\GitHub\avs_Pundis\labs\lab3\Release\lab3.exe
