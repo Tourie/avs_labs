@@ -9,10 +9,10 @@ using namespace std;
 
 void part1();
 void part2();
-void task1(int, int, void(*inc_f)(int, int*&));
-void check_result(int*,int);
-void inc_mutex(int, int*&);
-void inc_atomic(int, int*&);
+void task1(int, int, void(*inc_f)(int, vector<int>&));
+void check_result(vector<int>,int);
+void inc_mutex(int, vector<int>&);
+void inc_atomic(int, vector<int>&);
 
 int main() {
 	setlocale(LC_ALL, "RU");
@@ -42,31 +42,32 @@ void part1() {
 
 int index=0;
 mutex mtx;
-void inc_mutex(int num_tasks,int *&arr) {
+void inc_mutex(int num_tasks,vector<int> &arr) {
 	while (index < num_tasks) {
 		mtx.lock();
-		int tmp = index;
+		int temp = index;
 		++index;
 		mtx.unlock();
-		++arr[tmp];
+		if(temp < num_tasks)
+			arr.at(temp) += 1;
 		this_thread::sleep_for(chrono::nanoseconds(10));
 	}
 }
 
 atomic<int> safe_index{ 0 };
-void inc_atomic(int num_tasks, int*& arr) {
+void inc_atomic(int num_tasks, vector<int>& arr) {
 	while (safe_index < num_tasks) {
-		arr[safe_index.fetch_add(1)]+=1;
+		int temp = safe_index.fetch_add(1);
+		if (temp < num_tasks)
+			arr.at(temp)+=1;
 		this_thread::sleep_for(chrono::nanoseconds(10));
 	}
 }
 
-void task1(int num_tasks, int num_threads, void(*inc_func)(int,int*&)) {
-	
+void task1(int num_tasks, int num_threads, void(*inc_func)(int,vector<int>&)) {
 	auto start = chrono::steady_clock::now();
-
 	thread* threads = new thread[num_threads];
-	int* arr = new int[num_tasks] {0};
+	vector<int> arr(num_tasks);
 	index = 0;
 	safe_index.store(0);
 	for (int i = 0; i < num_threads; ++i) {
@@ -75,7 +76,6 @@ void task1(int num_tasks, int num_threads, void(*inc_func)(int,int*&)) {
 	for (int i = 0; i < num_threads; ++i) {
 		threads[i].join();
 	}
-	/*clock_t end = clock();*/
 	auto end = chrono::steady_clock::now();
 	auto duration = end - start;
 	//Check result
@@ -84,9 +84,9 @@ void task1(int num_tasks, int num_threads, void(*inc_func)(int,int*&)) {
 	cout << "Число потоков: " << num_threads << ", время выполнения: " << (double) (duration.count() / pow(10,9)) << endl;
 }
 
-void check_result(int* arr , int size) {
+void check_result(vector<int> arr , int size) {
 	for (int i = 0; i < size; ++i) {
-		if (arr[i] != 1) {
+		if (arr.at(i) != 1) {
 			cout << "Error!";
 			return;
 		}

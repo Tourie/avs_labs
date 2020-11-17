@@ -9,7 +9,6 @@ public:
 	FixedSizeQueue(int);
 	void push_back(T);
 	bool pop(T&);
-	//bool isFull();
 
 private:
 	int size;
@@ -17,11 +16,6 @@ private:
 	condition_variable cv;
 	mutex mtx;
 };
-
-//template<typename T>
-//inline bool FixedSizeQueue<T>::isFull() {
-//	
-//}
 
 template<typename T>
 FixedSizeQueue<T>::FixedSizeQueue(int size)
