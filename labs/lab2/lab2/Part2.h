@@ -6,8 +6,8 @@
 void task2(int, int, int, ISafeQueue<int>&);
 void task2_2(int, int, int, int);
 void join(thread*&, int);
-void Producer(int, ISafeQueue<int>&);
-void Consumer(ISafeQueue<int>&, long long int&);
+void Producer(int, ISafeQueue<int>&, int&);
+void Consumer(ISafeQueue<int>&, long long int&, int&, int);
 void check_res(long long int, int, int);
 
 mutex mt;
@@ -33,20 +33,23 @@ void task2_2(int num_tasks, int num_consumers, int num_producers, int size) {
 
 void task2(int num_tasks, int num_consumers, int num_producers, ISafeQueue<int>&queue) {
 	all_producers_worked =  false;
+	int finished_producers = 0;
 	thread* producers = new thread[num_producers];
 	thread* consumers = new thread[num_consumers];
 	long long int check = 0;
 	for (int i = 0; i < num_consumers; ++i) {
-		consumers[i] = thread([&]() { Consumer(queue, check); });
+		consumers[i] = thread([&]() { Consumer(queue, check, finished_producers, num_producers); });
 	}
 
 	for (int i = 0; i < num_producers; ++i) {
-		producers[i] = thread([&]() { Producer(num_tasks, queue); });
+		producers[i] = thread([&]() { Producer(num_tasks, queue, finished_producers); });
 		/*created_at_least_1_producer = true;
 		cv.notify_all();*/
 	}
-	join(producers, num_producers);
 	join(consumers, num_consumers);
+	join(producers, num_producers);
+	//all_producers_worked = true;
+	
 	check_res(check, num_producers, num_tasks);
 }
 
@@ -54,10 +57,9 @@ void join(thread*& threads, int size) {
 	for (int i = 0; i < size; ++i) {
 		threads[i].join();
 	}
-	all_producers_worked = true;
 }
 
-void Producer(int num_tasks, ISafeQueue<int> &queue) {
+void Producer(int num_tasks, ISafeQueue<int> &queue, int& finished_producers) {
 	cout << "Producer started\n";
 	auto start = chrono::steady_clock::now();
 	for (int i = 0; i < num_tasks; ++i) {
@@ -66,9 +68,10 @@ void Producer(int num_tasks, ISafeQueue<int> &queue) {
 	auto end = chrono::steady_clock::now();
 	auto duration = end - start;
 	cout << "Producer ended. Duration: " << (double) (duration.count() / pow(10,9) ) << endl;
+	++finished_producers;
 }
 
-void Consumer(ISafeQueue<int>& queue, long long int &local_index) {
+void Consumer(ISafeQueue<int>& queue, long long int &local_index, int& finished_producers, int num_producers) {
 	cout << "Consumer started\n";
 	auto start = chrono::steady_clock::now();
 	int value;
@@ -79,8 +82,9 @@ void Consumer(ISafeQueue<int>& queue, long long int &local_index) {
 			mt.unlock();
 		}
 		else {
-			if (all_producers_worked)
-				break;
+			/*if (all_producers_worked)
+				break;*/
+			if (finished_producers == num_producers) break;
 		}
 	}
 
