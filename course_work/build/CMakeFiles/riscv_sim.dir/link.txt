@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/riscv_sim.dir/Tests/test.cpp.o CMakeFiles/riscv_sim.dir/src/Instruction.cpp.o CMakeFiles/riscv_sim.dir/src/main.cpp.o  -o riscv_sim  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a -lpthread 

@@ -1,0 +1,12 @@
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from ClassDeclaration
+[ RUN      ] ClassDeclaration.test1
+Start testing decoder[       OK ] ClassDeclaration.test1 (0 ms)
+[ RUN      ] ClassDeclaration.test2
+Start testing executor.[       OK ] ClassDeclaration.test2 (0 ms)
+[----------] 2 tests from ClassDeclaration (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (1 ms total)
+[  PASSED  ] 2 tests.
