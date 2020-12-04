@@ -536,24 +536,6 @@ TestClass.h
 
 /home/makar/CLionProjects/avs_Pundis/course_work/src/BaseTypes.h
 
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Cpu.h
-Memory.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Memory.h
-Decoder.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Decoder.h
-RegisterFile.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/RegisterFile.h
-CsrFile.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/CsrFile.h
-Executor.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Executor.h
-
-/home/makar/CLionProjects/avs_Pundis/course_work/src/CsrFile.h
-optional
--
-Instruction.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
-
 /home/makar/CLionProjects/avs_Pundis/course_work/src/Decoder.h
 Instruction.h
 /home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
@@ -563,10 +545,6 @@ Instruction.h
 /home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
 cmath
 -
-
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.cpp
-Instruction.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
 
 /home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
 optional
@@ -578,43 +556,9 @@ BaseTypes.h
 PoolAllocator.h
 /home/makar/CLionProjects/avs_Pundis/course_work/src/PoolAllocator.h
 
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Memory.h
-Instruction.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
-iostream
--
-fstream
--
-elf.h
--
-cstring
--
-vector
--
-
 /home/makar/CLionProjects/avs_Pundis/course_work/src/PoolAllocator.h
 cstddef
 -
 cstdlib
--
-
-/home/makar/CLionProjects/avs_Pundis/course_work/src/RegisterFile.h
-Instruction.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Instruction.h
-
-/home/makar/CLionProjects/avs_Pundis/course_work/src/main.cpp
-Cpu.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Cpu.h
-Memory.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/Memory.h
-BaseTypes.h
-/home/makar/CLionProjects/avs_Pundis/course_work/src/BaseTypes.h
-optional
--
-iostream
--
-gtest/gtest.h
--
-gmock/gmock.h
 -
 

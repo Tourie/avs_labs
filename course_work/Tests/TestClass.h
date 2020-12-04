@@ -19,17 +19,18 @@ public:
     TestClass(){
 
     }
-    InstructionPtr testing_decoder(){
+    InstructionPtr testing_decoder(Word word){
         // page 130
-        word = 0b00111001001100101111001010010011;
+        this->word = word;
         Decoder dec;
         return dec.Decode(word);
     }
-    InstructionPtr testing_executor(Word val1){
+    InstructionPtr testing_executor(Word val1, Word val2){
         Decoder _decoder;
         Executor _exe;
         InstructionPtr instr = _decoder.Decode(word);
         instr->_src1Val = val1;
+        instr->_src2Val = val2;
         _exe.Execute(instr,0);
         return instr;
     }
