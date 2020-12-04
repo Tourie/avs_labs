@@ -23,7 +23,7 @@ int main() {
 	}
 	int i;
 	auto start = chrono::steady_clock::now();
-#pragma omp parallel for private(i) reduction(+:result) shared(arr1,arr2)
+#pragma omp parallel for private(i) reduction(+:result) shared(arr1,arr2) schedule(static)
 	for (int i = 0; i < size; ++i) {
 		result += arr1[i] * arr2[i];
 	}

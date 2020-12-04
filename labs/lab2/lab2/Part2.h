@@ -59,6 +59,7 @@ void join(thread*& threads, int size) {
 	}
 }
 
+mutex mt1;
 void Producer(int num_tasks, ISafeQueue<int> &queue, int& finished_producers) {
 	cout << "Producer started\n";
 	auto start = chrono::steady_clock::now();
@@ -67,8 +68,10 @@ void Producer(int num_tasks, ISafeQueue<int> &queue, int& finished_producers) {
 	}
 	auto end = chrono::steady_clock::now();
 	auto duration = end - start;
+	mt1.lock();
 	cout << "Producer ended. Duration: " << (double) (duration.count() / pow(10,9) ) << endl;
 	++finished_producers;
+	mt1.unlock();
 }
 
 void Consumer(ISafeQueue<int>& queue, long long int &local_index, int& finished_producers, int num_producers) {
