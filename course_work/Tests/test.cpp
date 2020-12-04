@@ -371,3 +371,142 @@ TEST_F(ClassDeclaration, test46) {
     expected_instr = obj.testing_decoder(word);
     ASSERT_EQ(IType::Unsupported, expected_instr->_type);
 }
+
+//ADDI
+TEST_F(ClassDeclaration, test47) {
+    Word word = 0b01000000000000000000000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Add, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test48){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val+expected_instruction->_imm.value());
+}
+
+//SLTI
+TEST_F(ClassDeclaration, test49) {
+    Word word = 0b00000000000000000010000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Slt, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test50){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, 1);
+}
+
+//SLTUI
+TEST_F(ClassDeclaration, test51) {
+    Word word = 0b00000000000000000011000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Sltu, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test52){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, 0);
+}
+
+//XORI
+TEST_F(ClassDeclaration, test53) {
+    Word word = 0b00100000000000000100000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Xor, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test54){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val^expected_instruction->_imm.value());
+}
+
+//ORI
+TEST_F(ClassDeclaration, test55) {
+    Word word = 0b00100000000000000110000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Or, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test56){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val|expected_instruction->_imm.value());
+}
+
+//ANDI
+TEST_F(ClassDeclaration, test57) {
+    Word word = 0b00100000000000000111000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::And, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test58){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val&expected_instruction->_imm.value());
+}
+
+//Slli
+TEST_F(ClassDeclaration, test59) {
+    Word word = 0b00100000000000000001000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Sll, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test60){
+    Word val1= -0b111;
+    Word val2 = 0b1;
+    auto expected_instruction = obj.testing_executor(val1,val2);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val<<expected_instruction->_imm.value());
+}
+
+//Srli
+TEST_F(ClassDeclaration, test61) {
+    Word word = 0b00000001000000000101000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Srl, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test62){
+    Word val1= -0b111;
+    auto expected_instruction = obj.testing_executor(val1,0);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val>>expected_instruction->_imm.value());
+    val1 = 0b111;
+    expected_instruction = obj.testing_executor(val1, 0);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val>>expected_instruction->_imm.value());
+}
+
+//Srai
+TEST_F(ClassDeclaration, test63) {
+    Word word = 0b01000001000000000101000000010011;
+    auto expected_instr = obj.testing_decoder(word);
+    ASSERT_EQ(IType::Alu, expected_instr->_type);
+    ASSERT_EQ(AluFunc::Sra, expected_instr->_aluFunc);
+}
+
+TEST_F(ClassDeclaration,test64){
+    Word val1= -0b111;
+    auto expected_instruction = obj.testing_executor(val1,0);
+    ASSERT_FALSE(expected_instruction->_data == expected_instruction->_src1Val>>expected_instruction->_imm.value());
+    val1= 0b111;
+    expected_instruction = obj.testing_executor(val1,0);
+    ASSERT_EQ(expected_instruction->_data, expected_instruction->_src1Val>>expected_instruction->_imm.value());
+}
