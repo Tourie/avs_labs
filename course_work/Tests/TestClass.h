@@ -13,8 +13,6 @@ using namespace std;
 
 class TestClass {
 public:
-    Word _imm=0b001110010011;
-    Word oppcode = 0b111;
     Word word;
     TestClass(){
 
